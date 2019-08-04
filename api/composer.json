@@ -1,0 +1,14 @@
+{
+    "name": "pan93412/balance_sheet_api_php",
+    "description": "The balance sheet api for php.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "pan93412",
+            "email": "pan93412@gmail.com"
+        }
+    ],
+    "minimum-stability": "RC",
+    "require": {}
+}
