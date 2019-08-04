@@ -2,8 +2,7 @@
 class db extends mysqli {
   function checkPass($result) {
     if ($result === false) {
-      echo "Failed. :(";
-      die('變更時發生錯誤。');
+      die('Failed. :(');
     }
   }
 
