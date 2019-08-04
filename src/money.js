@@ -36,12 +36,10 @@ function doRequest (method, data) {
  */
 function promptMsg (type, format, isRequired, usedOn, rawVal = '') {
   var optionalTxt
-  if (!isRequired) {
-    optionalTxt = '可選擇不填。' +
-      usedOn === 'add' // 目前只有 add 和 edit 兩個選項。true = add, false = edit
-      ? '不填則會使用預設值'
-      : `不填則會使用原本值：\n「${rawVal}」`
-  } else optionalTxt = '必須填寫。'
+  if (!isRequired && usedOn === 'add') optionalTxt = '可選擇不填，不填則會使用預設值。'
+  else if (!isRequired && usedOn === 'edit') optionalTxt = `可選擇不填。不填則會使用原本值：\n「${rawVal}」`
+  else if (isRequired) optionalTxt = '必須填寫'
+  else throw new Error('程式邏輯發生錯誤：請通知程式作者。')
 
   const userVal = prompt(`請輸入${type}。\n格式：${format}\n${optionalTxt}`)
 
