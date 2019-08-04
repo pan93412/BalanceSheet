@@ -44,7 +44,7 @@ class db extends mysqli {
     modifyTool('type', $type, $this, $id);
     modifyTool('amount', $amount, $this, $id);
 
-    if (preg_match('/^\d{0,4}-\d{0,2}-\d{0,2}$/', $raw_date) === 0) die("請遵照「年-月-日」格式。");
+    if (preg_match('/^\d{0,4}-\d{0,2}-\d{0,2}$/', $date) === 0) die("請遵照「年-月-日」格式。");
     modifyTool('date', $date, $this, $id);
 
     echo "OK"; // 告訴 JS 已經完成
