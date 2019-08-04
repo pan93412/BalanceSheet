@@ -12,7 +12,9 @@ class db extends mysqli {
 
   function insert($raw_name, $raw_desc, $raw_type, $raw_amount, $raw_date) {
     if ($raw_type === "") $raw_type = "其他";
-    
+    if (!is_numeric($raw_amount)) die("金額必須為數字。");
+    if (preg_match('/^\d{0,4}-\d{0,2}-\d{0,2}$/', $raw_date) === 0) die("請遵照「年-月-日」格式。");
+
     $name = $this->escape($raw_name);
     $desc = $this->escape($raw_desc);
     $type = $this->escape($raw_type);
@@ -41,6 +43,8 @@ class db extends mysqli {
     modifyTool('desc', $desc, $this, $id);
     modifyTool('type', $type, $this, $id);
     modifyTool('amount', $amount, $this, $id);
+
+    if (preg_match('/^\d{0,4}-\d{0,2}-\d{0,2}$/', $raw_date) === 0) die("請遵照「年-月-日」格式。");
     modifyTool('date', $date, $this, $id);
 
     echo "OK"; // 告訴 JS 已經完成
