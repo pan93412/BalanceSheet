@@ -5,8 +5,8 @@
 可選擇 Release 的 `pre-compiled` 預編譯版本，或是自己從 Git 庫 clone
 回來並輸入以下幾句（需先安裝 `yarn`）：
 
-> `yarn run package` 需要 GNU/Linux 及 GNU Tar，
-> 若無就直接把所有目錄及檔案上傳上去即可。
+> `yarn run package` 需要 bash、GNU tar 及 Git，
+> 若無就直接把所有目錄（除 `node_modules`）及檔案上傳上去即可。
 
 ```bash
 $ yarn --dev
