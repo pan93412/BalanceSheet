@@ -4,3 +4,4 @@ images/
 deprecated/
 *.html
 *.tar.gz
+api/options.php

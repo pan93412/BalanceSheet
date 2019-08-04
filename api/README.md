@@ -2,11 +2,41 @@
 歡迎使用收支表的 API :P
 
 ## 初始化
-將 `initDB.sql` 匯入您的資料庫。
+1. 將 `initDB.sql` 匯入您的資料庫。
 
 > **注意**：請將 initDB.sql 裡面的 `INSERT INTO `login` VALUES `... 行改成
 > 你自己的帳密。 **密碼是經 salt 且 SHA-256 雜湊的。**，可使用
 > 此 API 的 `login.php` 來產生，只需加上 query: `login.php?pass=[密碼]`
+
+2. 然後建立 `options.php` 檔案，並放入以下內容：
+
+```php
+<?php
+
+/*
+ * 設定 API。 
+ */
+
+// MySQL 的主機位置
+// default: 'localhost'
+$mysql_host = '[網域]';
+
+// MySQL 的使用者名稱
+// default: ''
+$mysql_username = '[使用者名稱]';
+
+// MySQL 的密碼
+// default: ''
+$mysql_password = "[密碼]";
+
+// MySQL 資料庫名稱
+// default: 'journals'
+$mysql_dbname = '[資料庫名稱]';
+
+?>
+```
+
+3. 確保你的網頁伺服器支援 PHP 及 MySQL，就開始使用吧！
 
 ## 對接
 進去前端的 `src/moneyAPI.js` 並插入以下字串：
