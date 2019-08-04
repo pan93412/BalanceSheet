@@ -30,6 +30,7 @@ class db extends mysqli {
 
   function modify($id, $name, $desc, $type, $amount, $date) {
     function modifyTool($fieldName, $fieldRawVal, $that, $id) {
+      if (!is_numeric($id)) die("id 必須為數字。");
       $fieldVal = $that->escape($fieldRawVal);
       if ($fieldVal !== "") $that->checkPass($that->query(
           "UPDATE journal SET `{$fieldName}`='{$fieldVal}' WHERE `id`={$id}"
@@ -46,6 +47,7 @@ class db extends mysqli {
   }
   
   function delete($id) {
+    if (!is_numeric($id)) die("id 必須為數字。");
     $this->checkPass($this->query("DELETE FROM journal WHERE `id`={$id}"));
 
     echo "OK"; // 告訴 JS 已經完成
