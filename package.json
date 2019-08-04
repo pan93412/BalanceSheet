@@ -1,0 +1,43 @@
+{
+  "name": "mproj",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "pan93412 <pan93412@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "genPage": "node node_modules/pug-cli/index.js -o . -P pug_src",
+    "build": "node node_modules/webpack/bin/webpack.js"
+  },
+  "devDependencies": {
+    "@font/nunito": "^1.0.3",
+    "aos": "^2.3.4",
+    "bootstrap": "^4.3.1",
+    "css-loader": "^3.1.0",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "file-loader": "^4.1.0",
+    "icomoon": "^1.0.0",
+    "jquery": "^3.4.1",
+    "jquery-sticky": "^1.0.4",
+    "jquery-ui": "^1.12.1",
+    "js-cookie": "^2.2.0",
+    "magnific-popup": "^1.1.0",
+    "mediaelement": "^4.2.10",
+    "node-sass": "^4.12.0",
+    "owl.carousel2": "^2.2.1",
+    "popper.js": "^1.15.0",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "sass-loader": "^7.1.0",
+    "sprintf-js": "^1.1.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {}
+}

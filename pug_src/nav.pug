@@ -1,0 +1,31 @@
+header.site-navbar.js-sticky-header.site-navbar-target(role='banner')
+  .container
+    .row.align-items-center.position-relative
+      .site-logo
+        a.text-black(href=siteURL)
+          |
+          span.text-primary #{siteName}
+      nav.site-navigation.text-center.ml-auto(role="navigation")
+        .container
+          .row.align-items-center.position-relative#nav
+            .btn-group#notLogined(style='display: none')
+              button.btn.btn-info.dropdown-toggle(type='button' data-toggle='dropdown') 登入！
+              .dropdown-menu.dropdown-menu-right
+                .container-fluid.mx-1(style='min-width: 15em; max-height: 20em')
+                  .row.px-1
+                    //
+                      原本賊想要「完全的」前後端分離，但是我實在不太想浪費更多時間
+                      在完成那些「沒什麼用」的 trick。
+
+                      寫 API 的大佬們，非常抱歉 😢
+                    form(action='api/login.php' method="POST")
+                      .form-group
+                        label(for='user') 帳戶
+                        input(type='input' class='form-control' id='user' name='user' placeholder='帳戶……' autocomplete="name" required)
+                        small.form-text.text-muted #[a(onclick='alert("問管理員吧🤔")' href='javascript:void(0)') 忘記帳戶？]
+                      .form-group
+                        label(for='passwordControl') 密碼
+                        input(type='password' class='form-control' id='passwordControl' name='pwd' placeholder='密碼……' autocomplete='newpassword' required)
+                        small.form-text.text-muted #[a(onclick='alert("問管理員吧🌚")' href='javascript:void(0)') 忘記密碼？]
+                        .dropdown-divider
+                        button.btn.btn-primary(type='submit') 登入吧！！！
