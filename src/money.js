@@ -6,20 +6,24 @@ const siteAPI = require('./moneyAPI.js')
  * @param {string} method「什麼」成功了？
  * @param {object} data 要傳出的資料
  */
-function doRequest (method, data) {
-  $.ajax(siteAPI.modifyData, {
-    data: data,
+async function doRequest (method, data) {
+  // 因向後相容性而使用此折衷方法。
+  const db = new FormData()
+  for (const d in data) {
+    db.append(d, data[d])
+  }
+
+  const resultRaw = await fetch(siteAPI.modifyData, {
     method: 'POST',
-    error: function (_, _status, err) {
-      alert(`好像有問題…… 伺服器回傳了：\n${err}\n若您無法排除，請告訴管理員。`)
-    },
-    success: data => {
-      if (data === 'OK') {
-        alert(method + '成功！ :)')
-        location.reload()
-      } else alert(`好像有問題…… 伺服器回傳了：\n${data}\n若您無法排除，請告訴管理員。`)
-    }
+    body: db
   })
+
+  const result = await resultRaw.text()
+
+  if (result === 'OK') {
+    alert(method + '成功！ :)')
+    location.reload()
+  } else alert(`好像有問題…… 伺服器回傳了：\n${data}\n若您無法排除，請告訴管理員。`)
 }
 
 /**
@@ -152,32 +156,41 @@ function removeCookies () {
 }
 
 async function main () {
-  const dataSet = await fetch(
-    siteAPI.getAllData,
+  const dataSetSource = await fetch(
+    siteAPI.getAllData + `?timestamp=${Date.now()}`,
     {
-      method: 'GET',
-      body: new URLSearchParams().append('timestamp', Date.now())
+      method: 'GET'
     }
-  ).json()
+  )
 
-  const authed = await fetch(
+  const dataSet = await dataSetSource.json()
+
+  const tokenDat = new FormData()
+  tokenDat.append('token', Cookie.get('token'))
+
+  const authedSource = await fetch(
     siteAPI.verify,
     {
       method: 'POST',
-      body: new URLSearchParams().append('token', Cookie.get('token'))
+      body: tokenDat
     }
-  ).text() === 'PASS'
+  )
 
+  // 伺服端是否已經核可認證？
+  const authed = await authedSource.text()
+  const isAuthed = authed === 'PASS'
+
+  console.log(isAuthed)
   let remain = 0 // 目前剩餘的錢。
 
   // 將資料庫中的收支資料寫至網頁
-  for (const data of dataSet) remain += appendToPage(data, authed)
+  for (const data of dataSet) remain += appendToPage(data, isAuthed)
 
   // 接著將計算的剩餘金額寫至網頁。
   document.querySelector('#remainAmount').innerHTML = remain + ' NTD'
 
   // 接著檢查登入情況。
-  if (authed) { // 如果已經驗證
+  if (isAuthed) { // 如果已經驗證
     addClickEvent('#addEntry', () => { insertToDB() }) // 「新增項目」有作用了！
 
     // 寫入「歡迎 xxx！[登出]」字樣至網頁。
