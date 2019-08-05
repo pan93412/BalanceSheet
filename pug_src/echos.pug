@@ -5,8 +5,13 @@
 
 //-
   siteName: 站台 URL
-  default: '/cls/cls/m' (畢竟這專案是給一個網站用的，
-  所以這架構是直接用那網站的架構。)
-- const siteURL = '/cls/cls/m/money'
+  default: ''
+- const siteURL = ''
+
+//-
+  siteLogo: 站台 Logo 呈現方式
+  default: '<a class='text-primary' href='${siteURL}'>${siteName}</a>'
+  desc: 建議別動。
+- const siteLogo = `<a class='text-primary' href='${siteURL}'>${siteName}</a>`
 
 //- API 請到 src/moneyAPI.js 設定。
