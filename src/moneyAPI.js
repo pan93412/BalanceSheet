@@ -14,6 +14,6 @@ module.exports = {
   addData: 'api/edit.php', // [POST] 將一個項目新增至資料庫 [JSON]
   modifyData: 'api/edit.php', // [PUT] 將資料庫某一項變更為傳入的內容。 [JSON]
   deleteData: 'api/edit.php', // [DELETE] 刪除資料庫某一項。[JSON]
-  login: 'api/login/login.php', // [POST] 登入並檢查帳戶及密碼雜湊值是否相符。
-  register: 'api/login/login.php' // [POST] 註冊，會傳入帳戶、密碼雜湊值及唯一標示碼。
+  login: 'api/login.php', // [POST] 登入並檢查帳戶及密碼雜湊值是否相符。
+  verify: 'api/login.php' // [POST] 驗證使用者的 Cookie token 是否有效。
 }

@@ -1,4 +1,3 @@
-const $ = require('jquery')
 const Cookie = require('js-cookie')
 const siteAPI = require('./moneyAPI.js')
 
@@ -9,16 +8,16 @@ const siteAPI = require('./moneyAPI.js')
  */
 function doRequest (method, data) {
   $.ajax(siteAPI.modifyData, {
-    data: data, //
+    data: data,
     method: 'POST',
     error: function (_, _status, err) {
-      alert(`好像有問題…… 伺服器回傳了：\n${err}\n請告訴管理員。`)
+      alert(`好像有問題…… 伺服器回傳了：\n${err}\n若您無法排除，請告訴管理員。`)
     },
     success: data => {
       if (data === 'OK') {
         alert(method + '成功！ :)')
         location.reload()
-      } else alert(`好像有問題…… 伺服器回傳了：\n${data}\n請告訴管理員。`)
+      } else alert(`好像有問題…… 伺服器回傳了：\n${data}\n若您無法排除，請告訴管理員。`)
     }
   })
 }
@@ -117,6 +116,7 @@ function addClickEvent (elem, action) {
  * @return 資料庫的剩餘值，可用來計算剩餘金額。
  */
 function appendToPage (db, authed) {
+  console.log('qwq')
   document.querySelector('#infoTable')
     .insertAdjacentHTML('afterbegin', `<tr style='color: black'>
       <td scope="col" width="5%">${db.id}</td>
@@ -142,38 +142,66 @@ function appendToPage (db, authed) {
   return Number(db.amount) // 剩餘金額
 }
 
-// 從 API 抓取
-$.ajax(siteAPI.getAllData, {
-  dataType: 'json',
-  data: {
-    request: 'all',
-    time: Date.now()
-  },
-  error: (_, _status, err) => {
-    alert(`抓取資料庫時發生錯誤：${err}`)
-  },
-  success: (datas) => {
-    let remain = 0
-    const authed = Cookie.get('authed') === 'yes'
-
-    for (const data of datas) remain += appendToPage(data, authed)
-
-    document.querySelector('#remainAmount').innerHTML = remain + ' NTD' // 剩餘值寫入
-
-    const loginAlert = () => { alert('請先登入，才可操作 qwq') }
-    if (authed) {
-      addClickEvent('#addEntry', () => { insertToDB() })
-      document.querySelector('#nav').insertAdjacentHTML('beforeend', `<p class='site-logo py-3'>歡迎 <b>${decodeURIComponent(Cookie.get('user'))}</b>！
-        <a href='javascript:void(0)' id='logout-link'>登出</a></p>`)
-      // 登出按鈕
-      addClickEvent('#logout-link', () => {
-        Cookie.remove('authed')
-        Cookie.remove('name')
-        location.reload()
-      })
-    } else {
-      addClickEvent('#addEntry', loginAlert)
-      document.querySelector('#notLogined').removeAttribute('style')
-    }
+/**
+ * 移除所有 Cookie。
+ */
+function removeCookies () {
+  for (const cookieName in Cookie.get()) {
+    Cookie.remove(cookieName)
   }
-})
+}
+
+async function main () {
+  const dataSet = await fetch(
+    siteAPI.getAllData,
+    {
+      method: 'GET',
+      body: new URLSearchParams().append('timestamp', Date.now())
+    }
+  ).json()
+
+  const authed = await fetch(
+    siteAPI.verify,
+    {
+      method: 'POST',
+      body: new URLSearchParams().append('token', Cookie.get('token'))
+    }
+  ).text() === 'PASS'
+
+  let remain = 0 // 目前剩餘的錢。
+
+  // 將資料庫中的收支資料寫至網頁
+  for (const data of dataSet) remain += appendToPage(data, authed)
+
+  // 接著將計算的剩餘金額寫至網頁。
+  document.querySelector('#remainAmount').innerHTML = remain + ' NTD'
+
+  // 接著檢查登入情況。
+  if (authed) { // 如果已經驗證
+    addClickEvent('#addEntry', () => { insertToDB() }) // 「新增項目」有作用了！
+
+    // 寫入「歡迎 xxx！[登出]」字樣至網頁。
+    document.querySelector('#nav').insertAdjacentHTML('beforeend', `<p class='site-logo py-3'>
+    歡迎 <b>${decodeURIComponent(Cookie.get('user'))}</b>！
+    <a href='javascript:void(0)' id='logout-link'>登出</a></p>`)
+
+    // 接著使登出連結有作用。
+    addClickEvent('#logout-link', () => {
+      removeCookies()
+      location.reload()
+    })
+  } else {
+    // lambda 函數：顯示「請先登入」字樣。
+    const loginAlert = () => { alert('請先登入，才可操作 qwq') }
+
+    // 然後，對 `addEntry` 新增項目按鈕新增「請先登入」指示。
+    addClickEvent('#addEntry', loginAlert)
+
+    // 最後，將原本隱藏在網頁的 #notLogined 的
+    // `display: none` 刪除即完成。
+    document.querySelector('#notLogined').removeAttribute('style')
+  }
+}
+
+// 入口點
+main()
