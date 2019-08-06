@@ -30,7 +30,7 @@ CREATE TABLE `journal` (
   `name` varchar(255) NOT NULL,
   `desc` varchar(512) DEFAULT NULL,
   `type` varchar(128) DEFAULT '其他',
-  `amount` int(11) NOT NULL,
+  `amount` DECIMAL(11,3) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
