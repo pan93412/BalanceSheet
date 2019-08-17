@@ -33,15 +33,16 @@
     "owl.carousel2": "^2.2.1",
     "popper.js": "^1.15.0",
     "pug": "^2.0.4",
-    "pug-cli": "^1.0.0-alpha6",
-    "sass-loader": "^7.1.0",
     "sprintf-js": "^1.1.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "pug-loader": "^2.4.0",
+    "sass-loader": "^7.2.0",
     "vue": "^2.6.10"
   }
 }
