@@ -1,8 +1,5 @@
 node_modules/
-assets/
-images/
-deprecated/
 *.html
 *.tar.gz
 api/options.php
-dist/
+frontend/dist/

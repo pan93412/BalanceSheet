@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "genPage": "node node_modules/pug-cli/index.js -o . -P pug_src",
     "build": "node node_modules/webpack/bin/webpack.js",
     "package": "bash package.sh"
   },

@@ -2,6 +2,6 @@
 
 echo "-> 正在封裝……"
 rm balanceSheet.tar.gz
-tar -czvf balanceSheet.tar.gz dist/*
+tar -czvf balanceSheet.tar.gz dist/* images ../api
 
 echo "OK! 完成封裝作業，成品為 balanceSheet.tar.gz。"
