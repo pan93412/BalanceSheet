@@ -45,13 +45,13 @@ html(lang='zh')
     include nav.pug
     +nav(siteLogo)
 
-    .site-section-cover.overlay.inner-page.bg-light#moneyPageSection(data-aos="fade")
+    .site-section-cover.overlay.inner-page.bg-light#moneyPageSection
       .container
         .row.align-items-center.justify-content-center.text-center
           .col-lg-10.box-shadow-content
             .block-heading-1
-              h1.mb-4(data-aos="fade-up" data-aos-delay="100")= pageName
-              span.d-block.mb-3.text-white(data-aos="fade-up")= pageDesc
+              h1.mb-4= pageName
+              span.d-block.mb-3.text-white= pageDesc
     
     section.site-section#table
       .container
