@@ -1,26 +1,43 @@
-# 「收支表」前端使用說明
-歡迎使用收支表的前端 :P
+# <a id='en_us'>BalanceSheet Repository</a>
+[正體中文](#zh_tw)
 
-## 初始化
-可選擇 Release 的 `pre-compiled` 預編譯版本，或是自己從 Git 庫 clone
-回來並輸入以下幾句（需先安裝 `yarn`）：
+- `api`: The directory where API placed in.
+- `frontend`: The directory where frontend page (eg. index.html) placed in.
 
-> `yarn run package` 需要 bash、GNU tar 及 Git，
-> 若無就直接把所有目錄（除 `node_modules`）及檔案上傳上去即可。
-
-```bash
-$ yarn --dev
-$ yarn run genPage
-$ yarn run build
-$ yarn run package
+## Build
+```
+$ cd frontend
+$ yarn build
+$ yarn package
 ```
 
-## 使用
-將 `yarn run package` 產生的 `balanceSheet.tar.gz` 上傳至
-您的伺服器並解壓，之後直接進去 `index.html`。
+Or, just use pre-compiled packages :)
 
-## 授權條款
-MIT LICENSE
+## Authors
+- Colorlib (Template authors)
+- [小魷魚，小確幸。](https://iwebs.tw)
+  - Idea maker :D
+- pan93412
+  - Programmer. :DDDDD
 
-## 作者
-pan93412 (2019)
+# <a id='zh_tw'>收支表檔案庫</a>
+[English](#en_us)
+
+- `api`: API 放置處
+- `frontend`: 前端頁面 (例如 index.html) 的放置目錄。
+
+## 編譯
+```
+$ cd frontend
+$ yarn build
+$ yarn package
+```
+
+…… 或使用預編譯包 :)
+
+## 作者群
+- Colorlib（範本作者）
+- [小魷魚，小確幸。](https://iwebs.tw)
+  - 點子提出者 :D
+- pan93412
+  - 程式開發者 :DDDDD
