@@ -9,9 +9,8 @@
     "build": "node node_modules/webpack/bin/webpack.js",
     "package": "bash package.sh"
   },
-  "devDependencies": {
+  "dependencies": {
     "@font/nunito": "^1.0.3",
-    "aos": "^2.3.4",
     "bootstrap": "^4.3.1",
     "css-loader": "^3.1.0",
     "eslint": "^6.1.0",
@@ -21,23 +20,15 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^4.1.0",
-    "icomoon": "^1.0.0",
     "jquery": "^3.4.1",
-    "jquery-sticky": "^1.0.4",
-    "jquery-ui": "^1.12.1",
     "js-cookie": "^2.2.0",
-    "magnific-popup": "^1.1.0",
-    "mediaelement": "^4.2.10",
     "node-sass": "^4.12.0",
-    "owl.carousel2": "^2.2.1",
     "popper.js": "^1.15.0",
     "pug": "^2.0.4",
     "sprintf-js": "^1.1.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
-  },
-  "dependencies": {
+    "webpack-cli": "^3.3.6",
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
     "pug-loader": "^2.4.0",
