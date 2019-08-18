@@ -5,13 +5,19 @@
 - `frontend`: The directory where frontend page (eg. index.html) placed in.
 
 ## Build
-```
-$ cd frontend
-$ yarn build
-$ yarn package
-```
+You can choose the `pre-compiled` version in GitHub release,
+or clone back this repository and do the below commands: (`yarn` required)
 
-Or, just use pre-compiled packages :)
+> `yarn run package` requires `bash` and GNU `tar` ,
+> if you don't have those, you can just upload the whole directory
+> (except `node_modules`) and files.
+
+```bash
+$ cd frontend
+$ yarn
+$ yarn run build
+$ yarn run package
+```
 
 ## Authors
 - Colorlib (Template authors)
@@ -27,13 +33,18 @@ Or, just use pre-compiled packages :)
 - `frontend`: 前端頁面 (例如 index.html) 的放置目錄。
 
 ## 編譯
-```
-$ cd frontend
-$ yarn build
-$ yarn package
-```
+可選擇 Release 的 `pre-compiled` 預編譯版本，或是自己從 Git 庫 clone
+回來並輸入以下幾句（需先安裝 `yarn`）：
 
-…… 或使用預編譯包 :)
+> `yarn run package` 需要 `bash` 及 GNU `tar`，
+> 若無就直接把所有目錄（除 `node_modules`）及檔案上傳上去即可。
+
+```bash
+$ cd frontend
+$ yarn
+$ yarn run build
+$ yarn run package
+```
 
 ## 作者群
 - Colorlib（範本作者）
