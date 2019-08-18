@@ -1,5 +1,6 @@
 const Cookie = require('js-cookie')
 const siteAPI = require('./moneyAPI.js')
+const sectionBg = require('./img/hero_1.jpg')
 
 /**
  * 使用 POST 發送請求
@@ -120,7 +121,6 @@ function addClickEvent (elem, action) {
  * @return 資料庫的剩餘值，可用來計算剩餘金額。
  */
 function appendToPage (db, authed) {
-  console.log('qwq')
   document.querySelector('#infoTable')
     .insertAdjacentHTML('afterbegin', `<tr style='color: black'>
       <td scope="col" width="5%">${db.id}</td>
@@ -176,11 +176,15 @@ async function main () {
     }
   )
 
+  // 新增背景圖片
+  const moneyPageSection = document.querySelector('#moneyPageSection')
+  moneyPageSection.style.setProperty('background-image', `url(${sectionBg})`)
+  moneyPageSection.style.setProperty('background-position', 'center')
+
   // 伺服端是否已經核可認證？
   const authed = await authedSource.text()
   const isAuthed = authed === 'PASS'
 
-  console.log(isAuthed)
   let remain = 0 // 目前剩餘的錢。
 
   // 將資料庫中的收支資料寫至網頁

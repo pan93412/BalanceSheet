@@ -1,9 +1,35 @@
 doctype html
 
-//- 設定網頁
-include echos.pug
+//- 設定網頁 :)
+
+//-
+  siteName: 站台名稱
+  default: 'Hello, World!'
+- const siteName = 'Hello, World!'
+
+//-
+  siteName: 站台 URL
+  default: ''
+- const siteURL = ''
+
+//-
+  siteLogo: 站台 Logo 呈現方式
+  default: '<a class='text-primary' href='${siteURL}'>${siteName}</a>'
+  desc: 建議別動。
+- const siteLogo = `<a class='text-primary' href='${siteURL}'>${siteName}</a>`
+
+//-
+  pageName: 頁面標題
+  default: '收支表'
 - const pageName = '收支表'
+
+//-
+  pageDesc: 頁面描述
+  default: '這是 ${siteName} 的 ${pageName}'
 - const pageDesc = `這是 ${siteName} 的 ${pageName}`
+
+//- API 請到 src/moneyAPI.js 設定。
+
 
 html(lang='zh')
   head
@@ -17,8 +43,9 @@ html(lang='zh')
 
   body(data-spy="scroll" data-target=".site-navbar-target" data-offset="300")
     include nav.pug
+    +nav(siteLogo)
 
-    .site-section-cover.overlay.inner-page.bg-light.moneyPageBody(data-aos="fade" style='background-image: url("images/hero_1.jpg"); background-position: center;')
+    .site-section-cover.overlay.inner-page.bg-light#moneyPageSection(data-aos="fade")
       .container
         .row.align-items-center.justify-content-center.text-center
           .col-lg-10.box-shadow-content
@@ -29,7 +56,7 @@ html(lang='zh')
     section.site-section#table
       .container
         .row
-          .col-8
+          .col
             h2= pageName
 
             .table-responsive
